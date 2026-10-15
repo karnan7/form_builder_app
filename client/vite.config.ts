@@ -1,9 +1,18 @@
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, lazyPlugins } from "vite-plus";
 
 // https://vite.dev/config/
 export default defineConfig({
-  fmt: {},
+  fmt: {
+    printWidth: 100,
+    semi: true,
+    singleQuote: false,
+    trailingComma: "all",
+    ignorePatterns: ["dist/**", "pnpm-lock.yaml"],
+    sortImports: {},
+    sortTailwindcss: {},
+  },
   lint: {
     plugins: ["react", "typescript", "oxc"],
     rules: {
@@ -27,5 +36,5 @@ export default defineConfig({
       },
     ],
   },
-  plugins: lazyPlugins(() => [react()]),
+  plugins: lazyPlugins(() => [react(), tailwindcss()]),
 });
