@@ -1,5 +1,11 @@
+import { ThemeToggle } from "./Layout/ThemeToggle";
+
 function App() {
-  return <section id="center">app</section>;
+  return (
+    <section>
+      <ThemeToggle />
+    </section>
+  );
 }
 
 export default App;
