@@ -76,6 +76,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
         skipAuthRefresh: true,
       });
       applySession(data);
+      return data.user;
     },
     [applySession],
   );
@@ -86,6 +87,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
         skipAuthRefresh: true,
       });
       applySession(data);
+      return data.user;
     },
     [applySession],
   );

@@ -34,7 +34,7 @@ export function Logo({
       </div>
       {showText && (
         <span className="text-lg font-bold tracking-tight text-fg">
-          Timely Forms <span className="text-brand-600">AI</span>
+          FormNest <span className="text-brand-600">AI</span>
         </span>
       )}
     </div>
