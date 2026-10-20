@@ -1,7 +1,7 @@
 import { cn } from "../lib/utils.js";
 
 interface LogoProps {
-  className: string;
+  className?: string;
   showText?: boolean;
   size?: number;
 }

@@ -67,7 +67,7 @@ const Login = () => {
         Welcome back
       </h2>
       <p className="mt-1.5 text-sm text-muted">
-        Log in to your Timely Forms AI workspace.
+        Log in to your FormNest AI workspace.
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-7 space-y-4">
         <Field label="Email" error={errors.email?.message}>
