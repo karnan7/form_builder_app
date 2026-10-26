@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import { GuestRoute, ProtectedRoute } from "./components/auth/RouteGuards";
 import { PageLoader } from "./components/ui/PageLoader";
 import Dashboard from "./pages/Dashboard";
+import DashboardLayout from "./Layout/DashboardLayout";
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
         </Route>
 
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
