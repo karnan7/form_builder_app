@@ -22,6 +22,7 @@ export function Logo({
           height={size * 0.56}
           viewBox="0 0 24 24"
           fill="none"
+          aria-hidden="true"
         >
           <path
             d="M4 5h16M4 12h10M4 19h7"

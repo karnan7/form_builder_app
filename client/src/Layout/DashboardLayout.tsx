@@ -67,8 +67,9 @@ const RailItem = ({ to, label, icon: Icon }: RailItemProps) => {
 };
 const DashboardLayout = () => {
   const navigate = useNavigate();
-  const [paletteOpen, setPaletteOpen] = useState(false);
-  const [mobileNav, setMobileNav] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState<boolean>(false);
+  const [mobileNav, setMobileNav] = useState<boolean>(false);
+
   return (
     <div className="flex min-h-screen bg-app">
       <div className="hidden w-20 shrink-0 lg:block" aria-hidden />
@@ -197,7 +198,7 @@ const DashboardLayout = () => {
           <Outlet />
         </main>
       </div>
-      {paletteOpen && <CommandPalette setOpen={setPaletteOpen} />}
+      <CommandPalette open={paletteOpen} setOpen={setPaletteOpen} />
     </div>
   );
 };
