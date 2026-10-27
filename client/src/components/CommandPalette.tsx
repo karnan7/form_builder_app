@@ -15,6 +15,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ChangeEvent,
   type Dispatch,
@@ -81,6 +82,7 @@ const CommandPalette = ({ open, setOpen }: CommandPaletteProps) => {
   const [query, setQuery] = useState<string>("");
   const [active, setActive] = useState<number>(0);
   const [forms, setForms] = useState<FormSummary[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const close = useCallback(() => setOpen(false), [setOpen]);
 
@@ -102,6 +104,10 @@ const CommandPalette = ({ open, setOpen }: CommandPaletteProps) => {
     //   cancelled = true;
     // };
     setForms([]);
+  }, [open]);
+
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
   }, [open]);
 
   const actions = useMemo<PaletteItem[]>(
@@ -196,6 +202,7 @@ const CommandPalette = ({ open, setOpen }: CommandPaletteProps) => {
         <div className="flex items-center gap-3 border-b border-default px-4">
           <Search className="h-4.5 w-4.5 text-muted" />
           <input
+            ref={inputRef}
             role="combobox"
             aria-expanded="true"
             aria-controls={LIST_ID}
@@ -210,54 +217,54 @@ const CommandPalette = ({ open, setOpen }: CommandPaletteProps) => {
             ESC
           </kbd>
         </div>
-      </div>
 
-      <div
-        id={LIST_ID}
-        role="listbox"
-        className="max-h-80 overflow-y-auto scrollbar-thin p-2"
-      >
-        {items.length === 0 && (
-          <p className="px-3 py-8 text-center text-sm text-muted">
-            No results found
-          </p>
-        )}
-        {items.map((item, i) => {
-          const Icon = item.icon;
-          const isActive = active === i;
-          return (
-            <button
-              key={`${item.kind}-${item.id}`}
-              id={optionId(i)}
-              type="button"
-              role="option"
-              aria-selected={isActive}
-              onMouseEnter={() => setActive(i)}
-              onClick={() => runItem(item)}
-              className={cn(
-                "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors",
-                isActive
-                  ? "bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200"
-                  : "text-fg",
-              )}
-            >
-              <Icon
-                className="h-4 w-4 shrink-0 opacity-80"
-                aria-hidden="true"
-              />
-              <span className="flex-1 truncate">{item.label}</span>
-              {item.kind === "form" && (
-                <span className="text-[10px] uppercase text-muted">Form</span>
-              )}
-              {isActive && (
-                <CornerDownLeft
-                  className="h-3.5 w-3.5 text-muted"
+        <div
+          id={LIST_ID}
+          role="listbox"
+          className="max-h-80 overflow-y-auto scrollbar-thin p-2"
+        >
+          {items.length === 0 && (
+            <p className="px-3 py-8 text-center text-sm text-muted">
+              No results found
+            </p>
+          )}
+          {items.map((item, i) => {
+            const Icon = item.icon;
+            const isActive = active === i;
+            return (
+              <button
+                key={`${item.kind}-${item.id}`}
+                id={optionId(i)}
+                type="button"
+                role="option"
+                aria-selected={isActive}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => runItem(item)}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors",
+                  isActive
+                    ? "bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-200"
+                    : "text-fg",
+                )}
+              >
+                <Icon
+                  className="h-4 w-4 shrink-0 opacity-80"
                   aria-hidden="true"
                 />
-              )}
-            </button>
-          );
-        })}
+                <span className="flex-1 truncate">{item.label}</span>
+                {item.kind === "form" && (
+                  <span className="text-[10px] uppercase text-muted">Form</span>
+                )}
+                {isActive && (
+                  <CornerDownLeft
+                    className="h-3.5 w-3.5 text-muted"
+                    aria-hidden="true"
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>,
     document.body,
