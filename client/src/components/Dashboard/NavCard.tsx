@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
-import { CardDecor, type CardDecorProps } from "./CardDecor";
 import { ArrowRight, type LucideIcon } from "lucide-react";
+import { CardDecor, type CardDecorProps } from "./CardDecor";
 import { cn } from "../../lib/utils";
 
 export interface NavCardProps {

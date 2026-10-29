@@ -17,7 +17,7 @@ import { NavLink, Outlet, useNavigate } from "react-router";
 import { cn } from "../lib/utils";
 import { Logo } from "../components/Logo";
 import { ThemeToggle } from "./ThemeToggle";
-import ProfileMenu from "../components/Dashboard/ProfileMenu";
+import ProfileMenu from "../components/dashboard/ProfileMenu";
 import CommandPalette from "../components/CommandPalette";
 
 const NAV = [

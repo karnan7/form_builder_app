@@ -3,14 +3,19 @@ import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router";
 import { Button } from "../components/ui/Button";
 import {
+  CheckCircle2,
+  Eye,
   FileEdit,
   FolderOpen,
   Globe,
+  Inbox,
   LayoutTemplate,
   Plus,
   Sparkles,
+  TrendingUp,
 } from "lucide-react";
-import NavCard from "../components/Dashboard/NavCard";
+import NavCard from "../components/dashboard/NavCard";
+import { StatCard } from "../components/ui/Card";
 
 const ACCENT = {
   gold: "#bfa23a",
@@ -36,6 +41,10 @@ const Dashboard = () => {
       views: 0,
     };
   }, [allForms]);
+
+  const conversion = counts.views
+    ? Math.round((counts.responses / counts.views) * 100)
+    : 0;
 
   const greeting = useMemo(() => {
     const h = new Date().getHours();
@@ -121,6 +130,34 @@ const Dashboard = () => {
           description="Work in progress, not yet shared publicly."
           badge={`${counts.draft} drafts`}
           onClick={() => jumpTo("draft")}
+        />
+      </div>
+
+      {/* Stats */}
+      <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <StatCard
+          icon={Inbox}
+          label="Responses"
+          value={counts.responses}
+          accent="green"
+        />
+        <StatCard
+          icon={Eye}
+          label="Total views"
+          value={counts.views}
+          accent="amber"
+        />
+        <StatCard
+          icon={TrendingUp}
+          label="Conversion"
+          value={`${conversion}%`}
+          accent="pink"
+        />
+        <StatCard
+          icon={CheckCircle2}
+          label="Published"
+          value={counts.published}
+          sublabel={`${counts.total} total forms`}
         />
       </div>
     </div>
