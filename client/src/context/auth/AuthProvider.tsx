@@ -17,7 +17,7 @@ import {
   refreshSession,
   setAccessToken,
   setOnAuthFailure,
-} from "../../lib/api";
+} from "../../services/api";
 
 const CHANNEL_NAME = "form-builder-auth";
 
