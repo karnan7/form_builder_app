@@ -1,7 +1,7 @@
 import axios from "axios";
 
-/** Turns any thrown error into a message you can show in a toast. */
-export function getApiErrorMessage(
+/** Turns any thrown value into a message you can show in a toast. */
+export function getErrorMessage(
   error: unknown,
   fallback = "Something went wrong",
 ): string {
@@ -12,5 +12,7 @@ export function getApiErrorMessage(
       return "Can't reach the server. Check your connection.";
     return error.response.data?.message ?? fallback;
   }
-  return error instanceof Error ? error.message : fallback;
+  if (error instanceof Error) return error.message;
+  if (typeof error === "string") return error;
+  return fallback;
 }

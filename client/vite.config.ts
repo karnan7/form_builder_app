@@ -17,6 +17,7 @@ export default defineConfig({
     plugins: ["react", "typescript", "oxc"],
     rules: {
       "react/rules-of-hooks": "error",
+      "react/exhaustive-deps": "warn",
       "react/only-export-components": [
         "warn",
         {
