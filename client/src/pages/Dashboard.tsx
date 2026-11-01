@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router";
 import { Button } from "../components/ui/Button";
@@ -16,6 +16,9 @@ import {
 } from "lucide-react";
 import NavCard from "../components/dashboard/NavCard";
 import { StatCard } from "../components/ui/Card";
+import FormsBrowser from "../components/forms/FormsBrowser";
+import { EMPTY_STATS, type FormFilter, type FormStats } from "../types/form";
+import { formApi } from "../services/formApi";
 
 const ACCENT = {
   gold: "#bfa23a",
@@ -28,22 +31,24 @@ const ACCENT = {
 const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [filter, setFilter] = useState<string>("all");
-  const [allForms, setAllForms] = useState([]);
+  const [filter, setFilter] = useState<FormFilter>("all");
+  const [stats, setStats] = useState<FormStats>(EMPTY_STATS);
   const listRef = useRef<HTMLDivElement | null>(null);
 
-  const counts = useMemo(() => {
-    return {
-      total: 4,
-      published: 2,
-      draft: 0,
-      responses: 0,
-      views: 0,
-    };
-  }, [allForms]);
+  const loadStats = useCallback(async () => {
+    try {
+      setStats(await formApi.stats());
+    } catch {
+      // ignore: stats are non-critical
+    }
+  }, []);
 
-  const conversion = counts.views
-    ? Math.round((counts.responses / counts.views) * 100)
+  useEffect(() => {
+    void loadStats();
+  }, [loadStats]);
+
+  const conversion = stats.views
+    ? Math.round((stats.responses / stats.views) * 100)
     : 0;
 
   const greeting = useMemo(() => {
@@ -59,7 +64,7 @@ const Dashboard = () => {
     return message;
   }, []);
 
-  const jumpTo = (nextFilter: string) => {
+  const jumpTo = (nextFilter: FormFilter) => {
     setFilter(nextFilter);
     listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -110,7 +115,7 @@ const Dashboard = () => {
           decor="a"
           title="All forms"
           description="Browse and manage everything you've created."
-          badge={`${counts.total} total`}
+          badge={`${stats.total} total`}
           onClick={() => jumpTo("all")}
         />
         <NavCard
@@ -119,7 +124,7 @@ const Dashboard = () => {
           decor="e"
           title="Published"
           description="Forms that are live and collecting responses."
-          badge={`${counts.published} live`}
+          badge={`${stats.published} live`}
           onClick={() => jumpTo("published")}
         />
         <NavCard
@@ -128,7 +133,7 @@ const Dashboard = () => {
           decor="d"
           title="Drafts"
           description="Work in progress, not yet shared publicly."
-          badge={`${counts.draft} drafts`}
+          badge={`${stats.draft} drafts`}
           onClick={() => jumpTo("draft")}
         />
       </div>
@@ -138,13 +143,13 @@ const Dashboard = () => {
         <StatCard
           icon={Inbox}
           label="Responses"
-          value={counts.responses}
+          value={stats.responses}
           accent="green"
         />
         <StatCard
           icon={Eye}
           label="Total views"
-          value={counts.views}
+          value={stats.views}
           accent="amber"
         />
         <StatCard
@@ -156,8 +161,17 @@ const Dashboard = () => {
         <StatCard
           icon={CheckCircle2}
           label="Published"
-          value={counts.published}
-          sublabel={`${counts.total} total forms`}
+          value={stats.published}
+          sublabel={`${stats.total} total forms`}
+        />
+      </div>
+
+      {/* Form List */}
+      <div ref={listRef} className="mt-10 scroll-mt-6">
+        <FormsBrowser
+          filter={filter}
+          onFilterChange={setFilter}
+          onMutate={loadStats}
         />
       </div>
     </div>
