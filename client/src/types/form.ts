@@ -39,3 +39,15 @@ export const EMPTY_STATS: FormStats = {
   responses: 0,
   views: 0,
 };
+
+export interface FormsListProps {
+  forms: Form[];
+  loading: boolean;
+  error: string | null;
+  /** True when the user has typed a search, so an empty list means "no matches". */
+  searching: boolean;
+  onRetry: () => void;
+  onDuplicate: (id: string) => void;
+  onDelete: (form: Form) => void;
+  onPatch: (id: string, data: FormUpdate) => void;
+}
