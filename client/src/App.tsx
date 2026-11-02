@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { GuestRoute, ProtectedRoute } from "./components/auth/RouteGuards";
-import { PageLoader } from "./components/ui/PageLoader";
+import { PageLoader } from "./components/ui/Feedback";
 import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./Layout/DashboardLayout";
 

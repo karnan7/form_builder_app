@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation, type Location } from "react-router";
-import { PageLoader } from "../ui/PageLoader";
+import { PageLoader } from "../ui/Feedback";
 import { useAuth } from "../../context/auth";
 
 interface RedirectState {
