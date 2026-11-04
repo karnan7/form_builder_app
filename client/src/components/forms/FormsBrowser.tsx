@@ -3,9 +3,10 @@ import { cn } from "../../lib/utils";
 import { Search } from "lucide-react";
 import { Input } from "../ui/Input";
 import { useDebounce } from "../../hooks/useDebounce";
-import { useNavigate } from "react-router";
-import type { FormFilter } from "../../types/form";
+import type { Form, FormFilter } from "../../types/form";
 import { useForms } from "../../hooks/useForm";
+import { FormsList } from "./FormsList";
+import { ConfirmModal } from "../ui/Modal";
 
 const FILTERS: { id: FormFilter; label: string }[] = [
   { id: "all", label: "All" },
@@ -29,28 +30,26 @@ const FormsBrowser = ({
   onFilterChange,
   onMutate,
 }: FormsBrowserProps) => {
-  const navigate = useNavigate();
   const [internalFilter, setInternalFilter] = useState<FormFilter>("all");
   const filter = filterProp ?? internalFilter;
   const setFilter = onFilterChange ?? setInternalFilter;
 
   const [searchInput, setSearchInput] = useState("");
   const search = useDebounce(searchInput, 300);
-  const [toDelete, setToDelete] = useState(null);
+  const [formToDelete, setFormToDelete] = useState<Form | null>(null);
 
-  const { forms, loading, reload, remove, duplicate, patch } = useForms({
+  const { forms, loading, error, reload, remove, duplicate, patch } = useForms({
     search,
     filter,
     onMutate,
   });
 
-  const renderContent = () => {
-    if (loading) {
-      return <p className="text-sm text-muted">Loading forms…</p>;
-    }
-
-    return null;
+  const confirmDelete = () => {
+    if (!formToDelete) return;
+    void remove(formToDelete._id);
+    setFormToDelete(null);
   };
+
   return (
     <>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -84,7 +83,28 @@ const FormsBrowser = ({
         </div>
       </div>
 
-      <div className="mt-5">{renderContent()}</div>
+      <div className="mt-5">
+        <FormsList
+          forms={forms}
+          loading={loading}
+          error={error}
+          searching={!!searchInput}
+          onRetry={reload}
+          onDuplicate={duplicate}
+          onDelete={setFormToDelete}
+          onPatch={patch}
+        />
+      </div>
+
+      <ConfirmModal
+        open={formToDelete !== null}
+        onClose={() => setFormToDelete(null)}
+        onConfirm={confirmDelete}
+        title="Delete this form?"
+        description={`"${formToDelete?.title}" and all its responses will be permanently removed. This cannot be undone.`}
+        confirmText="Delete form"
+        danger
+      />
     </>
   );
 };
