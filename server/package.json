@@ -1,12 +1,21 @@
 {
-  "name": "server",
+  "name": "FormNest AI",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend API for form builder SaaS",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.ts",
+    "dev": "node --watch index.ts",
+    "seed": "node utils/seed.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "forms",
+    "saas",
+    "ai",
+    "gemini",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "devEngines": {
