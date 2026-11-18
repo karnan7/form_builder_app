@@ -8,11 +8,11 @@ import { useAuth } from "../context/auth";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-interface RegisterFormValues {
+type RegisterFormValues = {
   name: string;
   email: string;
   password: string;
-}
+};
 const Register = () => {
   const { register: signup } = useAuth();
   const navigate = useNavigate();

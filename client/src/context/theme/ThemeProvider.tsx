@@ -27,10 +27,10 @@ function getSystemTheme(): ResolvedTheme {
   return window.matchMedia(DARK_QUERY).matches ? "dark" : "light";
 }
 
-interface ThemeProviderProps {
+type ThemeProviderProps = {
   children: ReactNode;
   defaultTheme?: Theme;
-}
+};
 
 export function ThemeProvider({
   children,

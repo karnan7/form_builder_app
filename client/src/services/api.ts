@@ -1,6 +1,10 @@
 import axios, { type AxiosError } from "axios";
 import type { AuthResponse } from "../types/auth";
 
+// [Note] - This is module augmentation - This code reopens Axios’s types and adds those two fields:
+// declare module "axios" { ... } means “I’m adding to the type definitions of the axios package.” declare in general tells TypeScript that something exists without generating any JavaScript. It’s purely type information.
+// interface AxiosRequestConfig { ... } doesn’t create a new interface. Because it has the same name as Axios’s interface, TypeScript merges the two. The result is Axios’s original fields plus your two optional ones.
+
 // Extra per-request flags used by the refresh logic below.
 declare module "axios" {
   interface AxiosRequestConfig {

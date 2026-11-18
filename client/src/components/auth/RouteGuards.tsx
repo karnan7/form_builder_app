@@ -2,9 +2,9 @@ import { Navigate, Outlet, useLocation, type Location } from "react-router";
 import { PageLoader } from "../ui/Feedback";
 import { useAuth } from "../../context/auth";
 
-interface RedirectState {
+type RedirectState = {
   from?: Location;
-}
+};
 
 export function ProtectedRoute() {
   const { isLoading, isAuthenticated } = useAuth();

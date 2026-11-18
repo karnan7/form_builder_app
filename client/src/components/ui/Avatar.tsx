@@ -1,11 +1,11 @@
 import { cn, initials } from "../../lib/utils";
 
-interface AvatarProps {
+type AvatarProps = {
   name: string;
   color: string;
   size?: "sm" | "md" | "lg";
   className?: string;
-}
+};
 const Avatar = ({
   name = "",
   color = "#6366f1",

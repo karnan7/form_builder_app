@@ -5,7 +5,7 @@ export type FormFilter =
   | "favorites"
   | "archived";
 
-export interface Form {
+export type Form = {
   _id: string;
   title: string;
   description?: string;
@@ -13,24 +13,24 @@ export interface Form {
   isArchived: boolean;
   responseCount?: number;
   views?: number;
-}
+};
 
-export interface ListParams {
+export type ListParams = {
   search?: string;
   filter?: FormFilter;
-}
+};
 
 export type FormUpdate = Partial<
   Pick<Form, "title" | "description" | "status" | "isArchived">
 >;
 
-export interface FormStats {
+export type FormStats = {
   total: number; // non-archived forms
   published: number; // non-archived, status "published"
   draft: number; // non-archived, status "draft"
   responses: number; // sum across all forms, including archived
   views: number; // sum across all forms, including archived
-}
+};
 
 export const EMPTY_STATS: FormStats = {
   total: 0,
@@ -40,7 +40,7 @@ export const EMPTY_STATS: FormStats = {
   views: 0,
 };
 
-export interface FormsListProps {
+export type FormsListProps = {
   forms: Form[];
   loading: boolean;
   error: string | null;
@@ -50,4 +50,4 @@ export interface FormsListProps {
   onDuplicate: (id: string) => void;
   onDelete: (form: Form) => void;
   onPatch: (id: string, data: FormUpdate) => void;
-}
+};

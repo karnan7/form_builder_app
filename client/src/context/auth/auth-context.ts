@@ -10,7 +10,7 @@ export const AUTH_STATUS = {
 /** "loading" | "authenticated" | "unauthenticated", derived from the object above */
 export type AuthStatus = (typeof AUTH_STATUS)[keyof typeof AUTH_STATUS];
 
-export interface AuthContextValue {
+export type AuthContextValue = {
   user: User | null;
   isLoading: boolean;
   status: AuthStatus;
@@ -18,6 +18,6 @@ export interface AuthContextValue {
   login: (input: LoginInput) => Promise<User>;
   register: (input: RegisterInput) => Promise<User>;
   logout: () => Promise<void>;
-}
+};
 
 export const AuthContext = createContext<AuthContextValue | null>(null);

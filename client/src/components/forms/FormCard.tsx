@@ -11,12 +11,12 @@ const STRIP = [
   { color: "#b06ca0", decor: "b" },
 ];
 
-interface FormCardProps {
+type FormCardProps = {
   form: Form;
   onDuplicate: (id: string) => void;
   onRequestDelete: (form: Form) => void;
   onPatch: (id: string, data: FormUpdate) => void;
-}
+};
 const FormCard = ({
   form,
   onDuplicate,

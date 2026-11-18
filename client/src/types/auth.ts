@@ -1,22 +1,22 @@
-export interface User {
+export type User = {
   id: string;
   name: string;
   email: string;
   avatarColor: string;
-}
+};
 
-export interface AuthResponse {
+export type AuthResponse = {
   accessToken: string;
   user: User;
-}
+};
 
-export interface LoginInput {
+export type LoginInput = {
   email: string;
   password: string;
-}
+};
 
-export interface RegisterInput {
+export type RegisterInput = {
   name: string;
   email: string;
   password: string;
-}
+};

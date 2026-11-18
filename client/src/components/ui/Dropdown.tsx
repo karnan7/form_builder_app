@@ -2,12 +2,12 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "../../lib/utils";
 import type { LucideIcon } from "lucide-react";
 
-interface DropdownProps {
+type DropdownProps = {
   trigger: ReactNode;
   children: ReactNode;
   align?: "left" | "right";
   className?: string;
-}
+};
 export function Dropdown({
   trigger,
   children,
@@ -60,13 +60,13 @@ export function Dropdown({
   );
 }
 
-interface MenuItemProps {
+type MenuItemProps = {
   icon: LucideIcon;
   children: ReactNode;
   onClick: () => void;
   danger?: boolean;
   className?: string;
-}
+};
 export function MenuItem({
   icon: Icon,
   children,

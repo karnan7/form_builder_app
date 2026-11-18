@@ -26,27 +26,27 @@ import { useNavigate } from "react-router";
 import { createPortal } from "react-dom";
 import { cn } from "../lib/utils";
 
-interface FormSummary {
+type FormSummary = {
   _id: string;
   title: string;
-}
-interface StaticAction {
+};
+type StaticAction = {
   id: string;
   label: string;
   icon: LucideIcon;
   to: string;
-}
-interface PaletteItem {
+};
+type PaletteItem = {
   id: string;
   label: string;
   icon: LucideIcon;
   kind: "action" | "form";
   run: () => void;
-}
-interface CommandPaletteProps {
+};
+type CommandPaletteProps = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-}
+};
 
 const STATIC_ACTIONS: StaticAction[] = [
   {

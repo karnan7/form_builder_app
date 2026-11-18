@@ -1,10 +1,10 @@
 import { cn } from "../lib/utils.js";
 
-interface LogoProps {
+type LogoProps = {
   className?: string;
   showText?: boolean;
   size?: number;
-}
+};
 
 export function Logo({
   className,

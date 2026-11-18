@@ -8,10 +8,10 @@ import { Button } from "../components/ui/Button";
 import { toast } from "sonner";
 import AuthLayout from "../components/auth/AuthLayout";
 
-interface LoginFormValues {
+type LoginFormValues = {
   email: string;
   password: string;
-}
+};
 
 const Login = () => {
   const { login } = useAuth();

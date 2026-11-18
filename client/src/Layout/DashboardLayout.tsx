@@ -29,11 +29,11 @@ const NAV = [
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 
-interface RailItemProps {
+type RailItemProps = {
   to: string;
   label: string;
   icon: LucideIcon;
-}
+};
 const RailItem = ({ to, label, icon: Icon }: RailItemProps) => {
   return (
     <NavLink

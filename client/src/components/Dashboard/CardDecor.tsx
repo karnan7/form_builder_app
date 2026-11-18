@@ -8,12 +8,12 @@ const SIZE = 170;
 
 type Variant = "a" | "b" | "c" | "d" | "e" | "hero";
 
-interface Shape {
+type Shape = {
   bands: number;
   max: number;
   base?: number;
   min?: number;
-}
+};
 
 const SHAPES: Record<Variant, Shape> = {
   a: { bands: 5, max: 116 },
@@ -24,11 +24,11 @@ const SHAPES: Record<Variant, Shape> = {
   hero: { bands: 6, max: 124, base: 0.22, min: 0.05 },
 };
 
-export interface CardDecorProps {
+export type CardDecorProps = {
   variant?: Variant;
   color?: string;
   className?: string;
-}
+};
 
 export function CardDecor({
   variant = "a",

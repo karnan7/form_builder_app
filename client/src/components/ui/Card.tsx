@@ -51,14 +51,14 @@ const ACCENTS = {
 
 export type StatAccent = keyof typeof ACCENTS;
 
-export interface StatCardProps {
+export type StatCardProps = {
   icon?: LucideIcon;
   label: string;
   value: ReactNode;
   sublabel?: ReactNode;
   accent?: StatAccent;
   className?: string;
-}
+};
 
 export function StatCard({
   icon: Icon,

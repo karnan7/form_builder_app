@@ -13,7 +13,7 @@ const SIZES: Record<ModalSize, string> = {
   xl: "max-w-4xl",
 };
 
-export interface ModalProps {
+export type ModalProps = {
   open: boolean;
   onClose?: () => void;
   title?: ReactNode;
@@ -21,7 +21,7 @@ export interface ModalProps {
   children?: ReactNode;
   footer?: ReactNode;
   size?: ModalSize;
-}
+};
 
 export function Modal({
   open,
@@ -97,7 +97,7 @@ export function Modal({
   );
 }
 
-export interface ConfirmModalProps {
+export type ConfirmModalProps = {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
@@ -106,7 +106,7 @@ export interface ConfirmModalProps {
   confirmText?: string;
   /** Styles the confirm button as destructive. */
   danger?: boolean;
-}
+};
 
 export function ConfirmModal({
   open,

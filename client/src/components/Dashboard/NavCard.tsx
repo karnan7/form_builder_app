@@ -3,7 +3,7 @@ import { ArrowRight, type LucideIcon } from "lucide-react";
 import { CardDecor, type CardDecorProps } from "./CardDecor";
 import { cn } from "../../lib/utils";
 
-export interface NavCardProps {
+export type NavCardProps = {
   title: string;
   description?: string;
   icon?: LucideIcon;
@@ -13,7 +13,7 @@ export interface NavCardProps {
   decor?: CardDecorProps["variant"];
   badge?: ReactNode;
   className?: string;
-}
+};
 
 const NavCard = ({
   title,

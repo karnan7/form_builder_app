@@ -15,9 +15,9 @@ export function Skeleton({
   );
 }
 
-interface SpinnerProps {
+type SpinnerProps = {
   className?: string;
-}
+};
 
 /** Small animated loading icon. Decorative: pair it with visible or screen-reader text. */
 export function Spinner({ className }: Readonly<SpinnerProps>) {
@@ -29,11 +29,11 @@ export function Spinner({ className }: Readonly<SpinnerProps>) {
   );
 }
 
-interface PageLoaderProps {
+type PageLoaderProps = {
   label?: string;
   /** Fill the whole viewport (route fallback) instead of a fixed-height block. */
   fullScreen?: boolean;
-}
+};
 
 /** Centered loading state for a page or a large section. */
 export function PageLoader({
@@ -55,14 +55,14 @@ export function PageLoader({
   );
 }
 
-export interface EmptyStateProps {
+export type EmptyStateProps = {
   icon?: LucideIcon;
   title: string;
   description?: ReactNode;
   /** Optional call to action, such as a button or a group of buttons. */
   action?: ReactNode;
   className?: string;
-}
+};
 
 /** Centered message for lists or pages with nothing to show. */
 export function EmptyState({

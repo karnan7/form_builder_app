@@ -95,9 +95,9 @@ export function Label({
 }
 
 // FieldError
-export interface FieldErrorProps {
+export type FieldErrorProps = {
   children?: React.ReactNode;
-}
+};
 
 export function FieldError({ children }: Readonly<FieldErrorProps>) {
   if (!children) return null;
@@ -105,13 +105,13 @@ export function FieldError({ children }: Readonly<FieldErrorProps>) {
 }
 
 // Field
-export interface FieldProps {
+export type FieldProps = {
   label?: string;
   required?: boolean;
   error?: React.ReactNode;
   hint?: React.ReactNode;
   children: React.ReactNode;
-}
+};
 
 export function Field({
   label,

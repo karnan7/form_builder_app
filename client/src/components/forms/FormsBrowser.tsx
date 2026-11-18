@@ -16,14 +16,14 @@ const FILTERS: { id: FormFilter; label: string }[] = [
   { id: "archived", label: "Archived" },
 ];
 
-interface FormsBrowserProps {
+type FormsBrowserProps = {
   title?: string;
   /** Pass `filter` + `onFilterChange` together to control the filter from a parent. */
   filter?: FormFilter;
   onFilterChange?: (filter: FormFilter) => void;
   /** Fires after any delete/duplicate/patch so a parent can refresh aggregate counts. */
   onMutate?: () => void;
-}
+};
 const FormsBrowser = ({
   title = "Your Forms",
   filter: filterProp,
